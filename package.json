@@ -1,0 +1,27 @@
+{
+  "name": "messengerapp",
+  "version": "1.0.0",
+  "description": "build with socketio",
+  "main": "app.js",
+  "dependencies": {
+    "ejs": "^3.1.5"
+  },
+  "devDependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.6"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rinrealvngangz/MessengerWithSocketIO.git"
+  },
+  "author": "rinreal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rinrealvngangz/MessengerWithSocketIO/issues"
+  },
+  "homepage": "https://github.com/Rinrealvngangz/MessengerWithSocketIO#readme"
+}
