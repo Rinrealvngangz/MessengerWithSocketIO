@@ -4,6 +4,7 @@
   "description": "build with socketio",
   "main": "app.js",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
     "mongodb": "^3.6.3",
     "mongoose": "^5.10.13",

@@ -1,19 +1,30 @@
 const express =require('express');
 const path =require('path');
+const dotenv = require('dotenv').config({path:'./config.env'});
 const passport =require('passport');
 const mongoose =require('mongoose');
-const port =3000;
 const app =express();
+const port =process.env.PORT;
+const strConnect =process.env.DATABASE
+.replace('{PASSWORD}',process.env.PASSWORD)
+.replace('{USERNAME}',process.env.USERNAME);
 
+mongoose.connect(strConnect,
+  { useNewUrlParser:true,useUnifiedTopology: true})
+  .then(()=>console.log('db connect success'));
 
-mongoose.connect(
-  `mongodb+srv://${nguyenmautuan}:${0949238337}@cluster0.ndtch.mongodb.net/test`
-  ,{ userNewUrlParser:true,useUnifiedTopology: true});
+const db =mongoose.connection;
 
-const db =mongoose.connection.then(()=>console.log('db connect success'););
+db.on('error',err=>{
+  console.log('ERROR:');
+  if(err.message =='Authentication failed.')
+  console.log('error connection string');
+  else {
+    console.log('Unspecified error');
+  }
+ process.exit(1);
 
-db.on('error',(err)=>console.log(err.message););
-
+});
 
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'));
