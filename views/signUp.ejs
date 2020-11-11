@@ -1,7 +1,12 @@
 <link rel="stylesheet" type="text/css" href="./style.css">
+
 <title>SignUp</title>
 
-<form id="form-signUp" action="/" method="post">
+<% if(name){ %>
+   <p style="color :red;">  <%= name%></p>
+<%  } %>
+
+<form id="form-signUp" action="/signUp" method="post">
        <label for="email">Email</label>
        <input type="email" name="email" placeholder="email..." required>
        <label for="username">Name</label>

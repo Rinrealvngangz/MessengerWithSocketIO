@@ -13,7 +13,10 @@ const app =express();
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'));
 app.use(passport.initialize());
-app.use(session({secret:'rinreal'}));
+app.use(session({secret:'rinreal',
+                 saveUninitialized:true,
+                 resave:true
+ }));
 app.use(express.json());
 app.use(flash());
 app.use(bodyParser.urlencoded({extended:true}))

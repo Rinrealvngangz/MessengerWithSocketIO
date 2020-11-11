@@ -1,29 +1,44 @@
 const express =require('express');
 const passport =require('passport');
+
+
 const localStrategy =require('passport-local').Strategy;
 const User = require('../models/userModel.js');
 let arrUser={};
 exports.viewSignUpUser =(req,res)=>{
       try{
-         res.render('signUp');
+           res.render('signUp',{name:''});
 
       }catch(err){
         console.log(`ERROR: ${err.message}`);
       }
 
 }
-exports.createUser =async(req,res)=>{
-   const user={
-   email: await req.body.email,
-    name: await req.body.username,
-    password:await req.body.password
-  }
-  if(user!==null){
-     await  User.create(user);
-      console.log(user);
-  }else{
-    console.log('error');
-  }
+exports.createUser = async (req,res)=>{
+  try{
+
+    const users={
+     email:  req.body.email,
+     name:   req.body.username,
+     password: req.body.password
+   }
+
+    await  User.findOne({name:users.name}, async (err,user)=>{
+          if(user)
+            res.render('signUp',{name:'Exists UserName ,please input username again!'});
+          else{
+            await User.create(users);
+              console.log(users);
+          res.redirect('/login');
+          }
+
+
+ })
+}
+catch(err){
+    res.redirect('/signUp')
+   console.log(err.message);
+ }
 }
 
 exports.viewSignIn =(req,res)=>{
@@ -44,7 +59,7 @@ exports.authenPassport =(req,res,next) =>{ passport.use(new localStrategy(
           }
           if(user && user.password ===password){
               arrUser=user;
-            return done(null,user,{message:`Welcome ${user.username}`});
+            return done(null,user);
 
           }
           return done(err);
@@ -52,7 +67,6 @@ exports.authenPassport =(req,res,next) =>{ passport.use(new localStrategy(
         }
   )
 }
-
 ))
   next();
 }
