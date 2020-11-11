@@ -1,16 +1,18 @@
-const express =require('express');
 const path =require('path');
 const dotenv = require('dotenv').config({path:'./config.env'});
-const passport =require('passport');
+const app =require('./app.js');
 const mongoose =require('mongoose');
-const app =express();
+
 const port =process.env.PORT;
 const strConnect =process.env.DATABASE
 .replace('{PASSWORD}',process.env.PASSWORD)
 .replace('{USERNAME}',process.env.USERNAME);
 
 mongoose.connect(strConnect,
-  { useNewUrlParser:true,useUnifiedTopology: true})
+  { useNewUrlParser:true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+})
   .then(()=>console.log('db connect success'));
 
 const db =mongoose.connection;
@@ -26,8 +28,4 @@ db.on('error',err=>{
 
 });
 
-app.set('view engine','ejs');
-app.set('views',path.join(__dirname,'views'));
-app.use(express.static(path.join(__dirname,'public')));
-app.get('/messenger',(req,res)=>res.render('main'));
 app.listen(port,()=>console.log(`server on listen port : ${port}`));

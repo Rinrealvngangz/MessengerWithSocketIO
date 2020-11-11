@@ -3,14 +3,51 @@
   padding: 0;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  font-size: 20px;;
+  font-size: 20px;
 
 }
 
-#logIn{
+form#form-signUp{
+  width: 200px;
+  line-height: 40px;
+  margin-left: 20px;
+}
 
-    margin-left: 20px;
-    margin-top: 20px;
+#btn_SignUp{
+  margin-top: 10px;
+}
+
+#btn-register{
+ width: 350px;
+
+ display: inline-flex;
+}
+p{
+  font-size: 15px;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+a{
+  color: #117fe6;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+#logIn-local{
+  width: 20px;
+  line-height: 40px;
+  margin-left: 20px;
+}
+#btn_SignIn{
+  margin-top: 10px;
+}
+p#txt-log-in-fb{
+  font-size: 20px;
+  font-weight:50;
+}
+
+#logIn{
+     display: inline-flex;
 }
 #btn_login{
     background-color:#077AE9;

@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 
 const Users = new mongoose.Schema({
+  email:String,
   name:{type :String, unique:true},
-  password:{ type :String, maxlength:6}
+  password:{ type :String, maxlength:8}
 
 });
-module.exports =mongoose.model('User',Users);
+const User =mongoose.model('localuser',Users);
+module.exports =User;
