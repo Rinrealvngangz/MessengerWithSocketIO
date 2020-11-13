@@ -1,10 +1,12 @@
 const express =require('express');
 const passport =require('passport');
-
-
+const bcrypt=require('bcrypt-nodejs');
+const facebookStrategy =require('passport-facebook').Strategy;
 const localStrategy =require('passport-local').Strategy;
 const User = require('../models/userModel.js');
+
 let arrUser={};
+
 exports.viewSignUpUser =(req,res)=>{
       try{
            res.render('signUp',{name:''});
@@ -17,23 +19,23 @@ exports.viewSignUpUser =(req,res)=>{
 exports.createUser = async (req,res)=>{
   try{
 
-    const users={
-     email:  req.body.email,
-     name:   req.body.username,
-     password: req.body.password
-   }
+  await bcrypt.hash(req.body.password, null, null, async (err, hash) => {
+      const users={
+       email:  req.body.email,
+       name:   req.body.username,
+       password: hash
+     }
+     await  User.findOne({name:users.name}, async (err,user)=>{
+           if(user)
+             res.render('signUp',{name:'Exists UserName ,please input username again!'});
+           else{
+             await User.create(users);
+               console.log(users);
+           res.redirect('/login');
+           }
+  })
+});
 
-    await  User.findOne({name:users.name}, async (err,user)=>{
-          if(user)
-            res.render('signUp',{name:'Exists UserName ,please input username again!'});
-          else{
-            await User.create(users);
-              console.log(users);
-          res.redirect('/login');
-          }
-
-
- })
 }
 catch(err){
     res.redirect('/signUp')
@@ -50,24 +52,51 @@ exports.signIn = passport.authenticate('local',{
       failureFlash:true
    })
 
-exports.authenPassport =(req,res,next) =>{ passport.use(new localStrategy(
-     async(username,password,done) =>{
-        await User.findOne({name:username},(err,user)=>{
+exports.authenPassport =(req,res,next) =>{
+  passport.use(new localStrategy(
+     async (username,password,done) =>{
+        await User.findOne({name:username},async(err,user)=>{
           if(!user){
-            return  done(null,false,{message:'Incorrect username'});
+            return  done(null,false,{message:'Incorrect UserName'});
 
           }
-          if(user && user.password ===password){
-              arrUser=user;
-            return done(null,user);
-
-          }
-          return done(err);
-
+          else{
+               await bcrypt.compare(password, user.password,(err,result)=>{
+                    if(user && result){
+                      arrUser=user;
+                    return done(null,user);
+                    }
+                    else{
+                        return  done(null,false,{message:'Incorrect password'});
+                    }
+              })
+            }
+                     return done(err);
+          });
         }
-  )
+ ));
+    next();
 }
-))
+exports.authenPassportWithFaceBook = passport.authenticate('facebook',{
+     scope:'email'
+});
+exports.authenPassportWithFaceBookCallBack =passport.authenticate('facebook',{
+  successRedirect:'/messenger',
+  failureRedirect:'/login',
+  failureFlash:true,
+  profileFields:['id','displayName','email','photo']
+})
+
+exports.authenFaceBook = (req,res,next)=>{ passport.use(new facebookStrategy({
+  clientID: process.env.ID_APP_FACEBOOK,
+clientSecret: process.env.FACEBOOK_APP_SECRET,
+callbackURL: "localhost:3000/login/auth/facebook/callback"
+},(accessToken, refreshToken, profile, done)=>{
+            console.log(profile);
+ }
+
+)
+);
   next();
 }
 

@@ -13,16 +13,16 @@ mongoose.connect(strConnect,
     useUnifiedTopology: true,
     useFindAndModify: false,
 })
-  .then(()=>console.log('db connect success'));
+.then(()=>console.log('db connect success'));
 
 const db =mongoose.connection;
 
 db.on('error',err=>{
   console.log('ERROR:');
-  if(err.message =='Authentication failed.')
+  if(err.message ==='Authentication failed.')
   console.log('error connection string');
   else {
-    console.log('Unspecified error');
+    console.log('Unspecified error: '+err.message);
   }
  process.exit(1);
 

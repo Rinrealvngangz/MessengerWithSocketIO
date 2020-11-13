@@ -7,5 +7,6 @@ router.route('/').get(UserLocal.viewSignIn)
                              UserLocal.serializeUser,
                              UserLocal.deserializeUser,
                              UserLocal.signIn);
-
+router.route('/auth/facebook').get(UserLocal.authenPassportWithFaceBook);
+router.route('/auth/facebook/callback').get(UserLocal.authenFaceBook,UserLocal.authenPassportWithFaceBookCallBack);
 module.exports =router;
