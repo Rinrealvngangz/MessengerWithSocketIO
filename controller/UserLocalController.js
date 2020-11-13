@@ -4,7 +4,7 @@ const bcrypt=require('bcrypt-nodejs');
 const facebookStrategy =require('passport-facebook').Strategy;
 const localStrategy =require('passport-local').Strategy;
 const User = require('../models/userModel.js');
-
+const UserFb =require('../models/userFaceBookModel.js');
 let arrUser={};
 
 exports.viewSignUpUser =(req,res)=>{
@@ -77,28 +77,34 @@ exports.authenPassport =(req,res,next) =>{
  ));
     next();
 }
-exports.authenPassportWithFaceBook = passport.authenticate('facebook',{
-     scope:'email'
-});
+exports.authenPassportWithFaceBook = passport.authenticate('facebook',
+     {scope:['email']}
+);
+
 exports.authenPassportWithFaceBookCallBack =passport.authenticate('facebook',{
+
   successRedirect:'/messenger',
   failureRedirect:'/login',
-  failureFlash:true,
-  profileFields:['id','displayName','email','photo']
-})
+  profileFields:['id','displayName','email']
+});
 
-exports.authenFaceBook = (req,res,next)=>{ passport.use(new facebookStrategy({
+
+
+passport.use(new facebookStrategy({
   clientID: process.env.ID_APP_FACEBOOK,
-clientSecret: process.env.FACEBOOK_APP_SECRET,
-callbackURL: "localhost:3000/login/auth/facebook/callback"
-},(accessToken, refreshToken, profile, done)=>{
-            console.log(profile);
+  clientSecret: process.env.FACEBOOK_APP_SECRET,
+  callbackURL: "http://localhost:3000/auth/facebook/callback"
+},
+(accessToken, refreshToken, profile, done)=>{
+      console.log(profile);
+     return done(null,profile);
+      //  await UserFb.findOrCreate({})
  }
 
 )
 );
-  next();
-}
+//  next();
+//}
 
 exports.viewMessenger=(req,res)=>{
      res.render('main',{name:arrUser.name});
