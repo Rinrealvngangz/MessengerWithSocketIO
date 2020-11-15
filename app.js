@@ -14,6 +14,8 @@ const app =express();
 
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'));
+app.use(bodyParser.urlencoded({extended:true}))
+app.use(express.static(path.join(__dirname,'public')));
 app.use(passport.initialize());
 app.use(session({secret:process.env.SECRET_SESSION,
                  saveUninitialized:true,
@@ -21,8 +23,7 @@ app.use(session({secret:process.env.SECRET_SESSION,
  }));
 app.use(express.json());
 app.use(flash());
-app.use(bodyParser.urlencoded({extended:true}))
-app.use(express.static(path.join(__dirname,'public')));
+
 
 app.use('/messenger',messengerRouter);
 app.use('/login',loginRouter);
