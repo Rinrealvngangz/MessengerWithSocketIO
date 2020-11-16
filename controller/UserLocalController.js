@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt-nodejs');
 const localStrategy = require('passport-local').Strategy;
 const User = require('../models/userModel.js');
 let arrUser = {};
+const arrUserfb =require('./UserFacebookController.js');
 
 exports.viewSignUpUser = (req, res) => {
   try {
@@ -46,7 +47,7 @@ exports.createUser = async (req, res) => {
   }
 }
 
-exports.viewSignIn = (req, res) => {
+exports.viewSignIn =(req, res) => {
   res.render('login');
 }
 exports.signIn = passport.authenticate('local', {
@@ -85,11 +86,19 @@ exports.authenPassport = (req, res, next) => {
   next();
 }
 
-exports.viewMessenger = (req, res) => {
-  res.render('main', {
-    name: arrUser.name
-  });
-}
+exports.viewMessenger =(req, res) => {
+  //let name;
+  /* if(arrUser.name ==null)
+      name =UserFacebookController.arrUserfb.name;
+     else{
+        name = arrUser.name;
+     }*/console.log(arrUserfb.getNamefb);
+    res.render('main', {
+      name: arrUserfb.getNamefb
+    });
+  }
+
+
 
 exports.serializeUser = (req, res, next) => {
   passport.serializeUser(function(user, done) {
@@ -100,9 +109,25 @@ exports.serializeUser = (req, res, next) => {
 
 exports.deserializeUser = (req, res, next) => {
   passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err, user) {
-      done(err, user);
-    });
+      User.findById(id, function(err, user) {
+          done(err, user);
+
+      });
   })
-  next();
+next();
 };
+exports.checkAuthenticated =(req,res,next)=>{
+     if(req.isAuthenticated()){
+       return next();
+     }
+       res.redirect('/login');
+
+
+}
+exports.checkNotAuthenticated =(req,res,next)=>{
+    if(req.isAuthenticated()){
+        return res.redirect('/messenger');
+    }
+    next();
+
+}

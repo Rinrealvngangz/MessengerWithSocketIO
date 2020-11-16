@@ -1,38 +1,39 @@
 <!DOCTYPE html>
 <html>
-   <header>
-    <meta charset="UTF-8">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="./script.js"></script>
-    <link rel="stylesheet" type="text/css" href="./style.css">
-   <title>LogIn</title>
+<header>
+  <meta charset="UTF-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="./script.js"></script>
+  <link rel="stylesheet" type="text/css" href="./style.css">
+  <title>LogIn</title>
 
-   </header>
+</header>
+
 <body>
-    <% if(messages.error){ %>
-       <p style="color :red;">  <%= messages.error%></p>
+  <% if(messages.error){ %>
+  <p style="color :red;"> <%= messages.error%></p>
   <%  } %>
   <section id='logIn-local'>
-      <form action="/login" method="post">
-             <label for="username">Name</label>
-             <input type="text" name="username" placeholder="username">
-             <label for="password">Password</label>
-             <input type="text" name="password" placeholder="password">
-             <div id='btn-register'>
-               <button type="submit" id="btn_SignIn">LogIn</button>
-               <p>Don't have an account? <a href="/signUp">SignUp</a> </p>
+    <form action="/login" method="post">
+      <label for="username">Name</label>
+      <input type="text" name="username" placeholder="username">
+      <label for="password">Password</label>
+      <input type="text" name="password" placeholder="password">
+      <div id='btn-register'>
+        <button type="submit" id="btn_SignIn">LogIn</button>
+        <p>Don't have an account? <a href="/signUp">SignUp</a> </p>
 
-             </div>
+      </div>
 
 
-      </form>
+    </form>
   </section>
-    <section id="logIn">
-        <p id="txt-log-in-fb">LogIn With</h2>
-        <button id="btn_login" type="submit">
-              <a href="/auth/facebook">FaceBook </a>
-        </button>
-    </section>
+  <section id="logIn">
+    <p id="txt-log-in-fb">LogIn With</h2>
+      <button id="btn_login" type="submit">
+        <a href="/auth/facebook">FaceBook </a>
+      </button>
+  </section>
 
 </body>
 

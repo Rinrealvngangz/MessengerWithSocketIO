@@ -49,6 +49,12 @@ p#txt-log-in-fb{
 #logIn{
      display: inline-flex;
 }
+#logIn a{
+  color:#ffffff;
+}
+
+
+
 #btn_login{
     background-color:#077AE9;
     padding: 10px;
