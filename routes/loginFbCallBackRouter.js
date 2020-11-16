@@ -1,7 +1,7 @@
 const express =require('express');
 const router =express.Router();
-const UserLocal =require('../controller/UserLocalController.js');
+const UserFb =require('../controller/UserFacebookController.js');
 
-router.route('/').get(UserLocal.authenPassportWithFaceBookCallBack);
+router.route('/').get(UserFb.authenPassportWithFaceBookCallBack);
 
 module.exports = router;

@@ -1,11 +1,11 @@
-const express =require('express');
-const router =express.Router();
-const UserLocal =require('../controller/UserLocalController.js');
-router.route('/').get(UserLocal.authenFacebook,
-  UserLocal.serializeUser,
-  UserLocal.deserializeUser,
-  UserLocal.authenPassportWithFaceBook,
+const express = require('express');
+const router = express.Router();
+const UserFb = require('../controller/UserFacebookController.js');
+router.route('/').get(UserFb.authenFacebook,
+  UserFb.serializeUser,
+  UserFb.deserializeUser,
+  UserFb.authenPassportWithFaceBook,
 
-                     );
+);
 
-module.exports =router;
+module.exports = router;
