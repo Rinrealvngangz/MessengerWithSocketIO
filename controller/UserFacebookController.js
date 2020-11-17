@@ -1,11 +1,7 @@
 const passport = require('passport');
 const facebookStrategy = require('passport-facebook').Strategy;
 const UserFb = require('../models/userFaceBookModel.js');
-let arrUserfb ={};
-let name;
-exports.getNamefb =function(){
-     return name;
-};
+
 
 exports.authenFacebook = (req, res, next) => {
   passport.use(new facebookStrategy({
@@ -32,16 +28,12 @@ exports.authenFacebook = (req, res, next) => {
               console.log(err.message)
 
             } else {
-              console.log(userfb);
-              name =userfb.name;
-              console.log(name);
               return done(null, userfb);
             }
           });
 
         } else {
-          name =user.name;
-          console.log(name);
+
           return done(null, user);
         }
         if (err) return done(err);
@@ -66,18 +58,18 @@ exports.authenPassportWithFaceBookCallBack = passport.authenticate('facebook', {
 
 exports.serializeUser = (req, res, next) => {
   passport.serializeUser(function(user, done) {
-    done(null, user.id);
+    done(null, user);
   })
   next();
 };
 
 exports.deserializeUser = (req, res, next) => {
-  passport.deserializeUser(function(id, done) {
-    UserFb.findOne({
-      id
-    }, function(err, user) {
-      done(err, user);
-    });
+  passport.deserializeUser(function(user, done) {
+    //UserFb.findOne({
+      //id
+    //}, function(err, user) {
+      done(null, user);
+    //});
   })
   next();
 };
