@@ -4,11 +4,13 @@ const path = require('path');
 const passport = require('passport');
 const flash = require('express-flash');
 const session = require('express-session');
+
 const loginRouter = require('./routes/loginRouter.js');
 const signUpRouter = require('./routes/signUpRouter.js');
 const messengerRouter = require('./routes/messengerRouter.js');
 const loginFbRouter = require('./routes/loginfbRouter.js');
 const loginFbCallbackRouter = require('./routes/loginFbCallBackRouter.js');
+
 const app = express();
 
 
@@ -37,4 +39,8 @@ app.use('/login', loginRouter);
 app.use('/auth/facebook', loginFbRouter);
 app.use('/auth/facebook/callback', loginFbCallbackRouter);
 app.use('/signUp', signUpRouter);
+
+
+
+
 module.exports = app;

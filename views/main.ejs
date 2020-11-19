@@ -1,31 +1,40 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta content="text/html; charset=UTF-8; X-Content-Type-Options=nosniff" http-equiv="Content-Type"/>
-    <meta charset="utf-8">
-      <link rel="stylesheet" type="text/css" href="./style.css">
-    <title>messenger</title>
-  </head>
-  <body>
 
-      <div class="container-messenger">
-            <div class="name">
-              <% if(name){ %>
-               <h2 style="color:#ffffff;"> <%=name%></h2>
-                <% }  %>
-             <img src="./image/icons8-facebook-messenger-50.png" id="logo-mess" width="50px" height="50px" alt="logo-messenger">
-            </div>
-            <div class="main-list">
-                <ul id="list-content">
-                  <!--this container content -->
-                </ul>            </div>
-            <div class="send_content">
-                <input id="input-text" type="text" name="content" placeholder="enter your message">
+<head>
+  <meta content="text/html; charset=UTF-8; X-Content-Type-Options=nosniff" http-equiv="Content-Type" />
+  <meta charset="utf-8">
 
-                 <img src="./image/icons8-arrow-48.png" id="img-send" width="38px" height="38px" alt="send_content">
-            </div>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="./index.js"></script>
+  <link rel="stylesheet" type="text/css" href="./style.css">
+  <title>messenger</title>
+</head>
 
-      </div>
+<body>
 
-  </body>
+  <div class="container-messenger">
+    <div class="name">
+      <% if(name){ %>
+      <h2 style="color:#ffffff;"> <%=name%></h2>
+      <% }  %>
+      <img src="./image/icons8-facebook-messenger-50.png" id="logo-mess" width="50px" height="50px" alt="logo-messenger">
+    </div>
+    <div class="main-list">
+      <ul id="list-content">
+        <!--this container content -->
+        
+      </ul>
+    </div>
+    <div class="send_content">
+      <input id="input-text" type="text" name="content" placeholder="enter your message">
+
+      <img src="./image/icons8-arrow-48.png" id="img-send" width="38px" height="38px" alt="send_content">
+    </div>
+
+  </div>
+
+</body>
+
 </html>

@@ -2,7 +2,8 @@ const path =require('path');
 const dotenv = require('dotenv').config({path:'./config.env'});
 const app =require('./app.js');
 const mongoose =require('mongoose');
-
+const server = require('http').Server(app);
+const io =require('socket.io')(server);
 const port =process.env.PORT;
 const strConnect =process.env.DATABASE
 .replace('{PASSWORD}',process.env.PASSWORD)
@@ -28,4 +29,16 @@ db.on('error',err=>{
 
 });
 
-app.listen(port,()=>console.log(`server on listen port : ${port}`));
+io.on('connection',(socket)=>{
+    console.log('a user connected');
+     socket.on('client-server-message',(msg)=>{
+           io.emit('client-server-message',msg);
+           console.log(msg);
+     })
+
+    socket.on('disconnect',()=>{
+       console.log('user disconnected');
+    })
+});
+
+server.listen(port,()=>console.log(`server on listen port : ${port}`));
