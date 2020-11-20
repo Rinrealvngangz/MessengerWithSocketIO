@@ -89,7 +89,8 @@ exports.authenPassport = (req, res, next) => {
 exports.viewMessenger =(req, res) => {
 
     res.render('main', {
-      name: req.user.name
+      name: req.user.name,
+      photo:req.user.photo
     });
 
   }

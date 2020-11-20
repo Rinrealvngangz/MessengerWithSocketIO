@@ -2,6 +2,12 @@ const passport = require('passport');
 const facebookStrategy = require('passport-facebook').Strategy;
 const UserFb = require('../models/userFaceBookModel.js');
 
+/*const download = (url, path, callback) => {
+     const sw = fs.createWriteStream(path);
+     const req = https.get(url,(res)=>{
+       res.pipe(sw);
+     })
+}*/
 
 exports.authenFacebook = (req, res, next) => {
   passport.use(new facebookStrategy({
@@ -13,9 +19,14 @@ exports.authenFacebook = (req, res, next) => {
     async (accessToken, refreshToken, profile, done) => {
       await UserFb.findOne({
         id: profile._json.id
-      }, (err, user) => {
+      }, async (err, user) => {
         //console.log(profile);
         if (!user) {
+        /*  const url =profile.photos[0].value;
+          console.log(url);
+          const path =`./public/image/${Date.now()}.jpg`;
+          const pic =`${Date.now()}.jpg`;
+         await download(url,path);*/
 
           const userfb = new UserFb({
             id: profile._json.id,

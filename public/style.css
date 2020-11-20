@@ -6,7 +6,10 @@
   font-size: 20px;
 
 }
-
+small{
+  font-size: 15px;
+  color: #232629;
+}
 form#form-signUp{
   width: 200px;
   line-height: 40px;
@@ -81,6 +84,7 @@ p#txt-log-in-fb{
 }
 
 .name{
+  position: relative;
   background-color: #077AE9;
   height: 60px;
   border-top-left-radius: 20px;
@@ -92,17 +96,27 @@ p#txt-log-in-fb{
   display: block;
   padding-top: 20px;
   padding-left: 20px;
-  position: absolute;
+    position: absolute;
+  
 }
-.name #logo-mess{
-  margin-left: 380px;
-  display: block;
+
+.name #avatar{
+    margin-left: 380px;
+
+    border-radius: 50px;
+    margin-top: 5px;
+    position: absolute;
+    display: inline-block;
 }
 
 div.main-list{
   height: 500px;
-   background-color: #232629;
+  background-color: #232629;
+overflow-x:hidden;
+ overflow:auto;
 }
+
+
 .main-list div.messages div{
   clear:both;
 
