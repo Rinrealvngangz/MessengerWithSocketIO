@@ -32,7 +32,7 @@ db.on('error',err=>{
 io.on('connection',(socket)=>{
     console.log('a user connected');
      socket.on('client-server-message',(msg)=>{
-           io.emit('client-server-message',msg);
+           socket.emit('client-server-message',msg);
            console.log(msg);
      })
 

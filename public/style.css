@@ -6,14 +6,7 @@
   font-size: 20px;
 
 }
-li{
-  list-style-type: none;
-  color :#ffffff;
-   text-align: right;
-   margin-right: 25px;
-   line-height: 40px;
-      
-}
+
 form#form-signUp{
   width: 200px;
   line-height: 40px;
@@ -89,8 +82,7 @@ p#txt-log-in-fb{
 
 .name{
   background-color: #077AE9;
-  display: block;
-  position: relative;
+  height: 60px;
   border-top-left-radius: 20px;
   border-top-right-radius:20px;
 }
@@ -107,10 +99,41 @@ p#txt-log-in-fb{
   display: block;
 }
 
-div .main-list{
+div.main-list{
   height: 500px;
    background-color: #232629;
 }
+.main-list div.messages div{
+  clear:both;
+
+}
+.main-list div.messages div.left-message {
+  padding: 10px;
+  width: 70%;
+  margin-left: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 0px 5px #ddd;
+  background-color: #3e4042;
+  color:#8a8d91;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+
+}
+
+.main-list div.messages div.right-message {
+    padding:10px;
+    color :#ffffff;
+    background-color: #0084ff;
+    margin-bottom: 20px;
+    margin-left:120px;
+    width: 70%;
+    box-shadow: 0 0px 5px #ddd;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+
+
 .send_content{
   background-color: #232629;
   border-bottom-left-radius: 20px;
