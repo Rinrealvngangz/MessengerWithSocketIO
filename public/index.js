@@ -1,9 +1,17 @@
 $(document).ready(function() {
   var socket = io();
   const name = $('h2').text();
+
+  $("#btn-JoinRoom").click(()=>{
+       const idName =$('#inputId').val();
+       $('.idRoom-display').text(idName);
+       location.reload();
+       $('.container-createRoom').css('display','none');
+
+  })
+
   $('#img-send').click((e) => {
     e.preventDefault();
-
     const text = $('#input-text').val();
     socket.emit('client-server-message', { nd:text,name:name});
     $('.messages').append(`<div class="right-message">${text}<br><small>${name}</small></div>`);

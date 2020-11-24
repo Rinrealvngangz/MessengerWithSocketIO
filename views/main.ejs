@@ -13,13 +13,25 @@
 </head>
 
 <body>
+  <div class="container-createRoom">
+       <form id="form-create" action="/messenger/createRoom" method="post">
+           <input type="radio" name="room" id="radio-privateRoom" value="privateRoom">
+           <label for ="privateRoom">Private Room</label><br>
+           <input type="radio" name="room" id="radio-ChatRoom" value="chatRoom">
+           <label for ="chatRoom">Chat Room</label><br>
+           <button type="button" name="btn-CreateRoom">Create Room</button><br>
+           <input type="text" name="inputId" id="inputId" placeholder="input Id Room">
+           <button type="submit" name="btn-JoinRoom" id="btn-JoinRoom">join Room</button>
 
+       </form>
+  </div>
   <div class="container-messenger">
     <div class="name">
       <% if(name){ %>
       <h2 class="name-display" style="color:#ffffff;"> <%=name%></h2>
       <% }  %>
       <% if(photo){ %>
+      <h2 name='textId' class="idRoom-display"></h2>
       <img src='<%=photo%>' id="avatar" width="50px" height="50px" alt="logo-avatar">
       <% } else {%>
       <img src='./image/icons8-facebook-messenger-50.png' id="avatar" width="50px" height="50px" alt="logo-avatar">

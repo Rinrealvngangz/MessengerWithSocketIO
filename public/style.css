@@ -97,9 +97,12 @@ p#txt-log-in-fb{
   padding-top: 20px;
   padding-left: 20px;
     position: absolute;
-  
-}
 
+}
+.name h2.idRoom-display{
+    padding-left: 100px;
+
+}
 .name #avatar{
     margin-left: 380px;
 
@@ -177,4 +180,17 @@ overflow-x:hidden;
   cursor: pointer;
   width: 40px;
   height: 40px;
+}
+
+.container-createRoom{
+  margin-left: 20px;
+
+}
+.container-createRoom form.form-create input{
+  margin-top: 15px;
+}
+
+.container-createRoom form.form-create button{
+  margin-top: 15px;
+
 }

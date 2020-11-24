@@ -23,6 +23,7 @@ exports.createUser = async (req, res) => {
         email: req.body.email,
         name: req.body.username,
         password: hash
+
       }
       await User.findOne({
         name: users.name
@@ -86,16 +87,15 @@ exports.authenPassport = (req, res, next) => {
   next();
 }
 
-exports.viewMessenger =(req, res) => {
 
+exports.viewMessenger =(req, res,next) => {
     res.render('main', {
       name: req.user.name,
       photo:req.user.photo
+
     });
 
   }
-
-
 
 exports.serializeUser = (req, res, next) => {
   passport.serializeUser(function(user, done) {
