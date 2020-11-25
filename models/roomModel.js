@@ -1,18 +1,11 @@
 const mongoose =require('mongoose');
 
-const contentModel = new mongoose.Schema({
-      idByUser:{type:String},
-      content:{type:String},
-      dateSend:{type:Date,default:Date.now},
-    },{_id:false});
-
-const roomModel = new mongoose.Schema({
+const RoomModel = new mongoose.Schema({
     id:String,
-  //  messById:[content],
-    typeRoom:{type:Boolean,default:true},
-
+    messid:[{ type: mongoose.Schema.Types.ObjectId, ref: 'content'}],
+    room:{ type: Boolean, default:true}
 },{_id:false});
 
-const room = mongoose.model('room',roomModel);
+const room = mongoose.model('room',RoomModel);
 
-exports.module =room;
+module.exports =room;

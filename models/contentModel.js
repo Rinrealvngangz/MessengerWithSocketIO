@@ -1,10 +1,11 @@
 const mongoose =require('mongoose');
 
 const contentModel = new mongoose.Schema({
-      idByUser:{type:String},
-      content:{type:String},
-      dateSend:{type:Date,default:Date.now},
-    },{_id:false});
+      idUser:{ type: mongoose.Schema.Types.ObjectId, ref: 'localuser'},
+      content:{type: String ,default:null},
+      dateSend:{type: Date, default: Date.now},
+    });
 
 const content =mongoose.model('content',contentModel);
-exports.module =content;    
+
+module.exports =content;

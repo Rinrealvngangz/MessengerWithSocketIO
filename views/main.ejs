@@ -14,15 +14,18 @@
 
 <body>
   <div class="container-createRoom">
-       <form id="form-create" action="/messenger/createRoom" method="post">
-           <input type="radio" name="room" id="radio-privateRoom" value="privateRoom">
+       <form id="form-create" action="/messenger" method="post">
+           <input type="radio" name="Room" id="radio-privateRoom" value="privateRoom">
            <label for ="privateRoom">Private Room</label><br>
-           <input type="radio" name="room" id="radio-ChatRoom" value="chatRoom">
+           <input type="radio" name="Room" id="radio-ChatRoom" value="chatRoom">
            <label for ="chatRoom">Chat Room</label><br>
-           <button type="button" name="btn-CreateRoom">Create Room</button><br>
-           <input type="text" name="inputId" id="inputId" placeholder="input Id Room">
-           <button type="submit" name="btn-JoinRoom" id="btn-JoinRoom">join Room</button>
+           <button type="submit" name="btn-CreateRoom">Create Room</button><br>
 
+
+       </form>
+       <form id="form-JoinRoom" action="/" method="get">
+         <input type="text" name="inputId" id="inputId" placeholder="input Id Room">
+         <button type="submit" name="btn-JoinRoom" id="btn-JoinRoom">join Room</button>
        </form>
   </div>
   <div class="container-messenger">
