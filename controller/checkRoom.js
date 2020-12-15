@@ -12,16 +12,16 @@ exports.checkIdRoom=async(req,res)=>{
                          await result.save();
                          results.joinRoom.push(result);
                          await results.save();
-                         res.render('main',{idRoom:result.id,
-                                            photo:req.user.photo,
-                                             name:req.user.name
-                                            });
+
                       }
                       if(err){
                         console.log(err);
                       }
                 });
-
+                res.render('main',{idRoom:result.id,
+                                   photo:req.user.photo,
+                                    name:req.user.name
+                                  });
           }else{
               res.redirect('/messenger');
           }

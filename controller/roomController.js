@@ -29,10 +29,10 @@ exports.createRoom= async (req,res)=>{
                     console.log(err);
                   }
              });
-          res.render('main',{idRoom:roomObj.id,
+        /*  res.render('main',{idRoom:roomObj.id,
                              photo:req.user.photo,
                               name:req.user.name
-                             });
+                            });*/
             }else{
               console.log('no exists userName');
             }
