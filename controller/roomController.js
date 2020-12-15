@@ -4,28 +4,35 @@ const User =require('../models/userModel.js');
 
 exports.createRoom= async (req,res)=>{
     const username = req.user.name;
+    const idRoom =req.body.createId;
     let filter = {name:username};
     let arrIdRoom =[];
-    await User.findOne( filter,async (err,result)=>{
+    let capa =true;
+    await User.findOne(filter,async (err,result)=>{
             if(result){
-              const idRoom =Date.now() + username;
-                let objRoom={
-                  id:idRoom,
-                  capa:true
-                };
 
-              if(req.body.Room === 'privateRoom'){
-                  objRoom ={
-                     id:idRoom,
-                     capa:false
-                 };
-              }
-             arrIdRoom = result.idRoom;
-             arrIdRoom.unshift(objRoom);
-           await User.updateOne(filter,{idRoom:arrIdRoom});
-            await result.save();
-              res.redirect('/messenger');
+              if(req.body.Room === 'privateRoom'){capa=false;}
 
+             const roomObj ={
+               id:idRoom,
+               roomCapacity:capa,
+               idUser:[]
+             }
+             roomObj.idUser.unshift(result);
+             console.log(roomObj);
+             await Room.create(roomObj,async(err,results)=>{
+                       if(results){
+                  result.idRoom.push(results);
+                  await result.save();
+                  }
+                  if(err){
+                    console.log(err);
+                  }
+             });
+          res.render('main',{idRoom:roomObj.id,
+                             photo:req.user.photo,
+                              name:req.user.name
+                             });
             }else{
               console.log('no exists userName');
             }

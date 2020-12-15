@@ -4,21 +4,27 @@ $(document).ready(function() {
 
   $("#btn-JoinRoom").click(()=>{
        const idName =$('#inputId').val();
-       $('.idRoom-display').text(idName);
-       location.reload();
-       $('.container-createRoom').css('display','none');
-
+       socket.emit('create-room',idName);
   })
+  $('#CreateRoom').click(()=>{
+      const idRoom = Date.now();
+    const data =  $('#createId').val(idRoom);
+         socket.emit('create-room',idRoom);
+         alert(`success room: ${idRoom}`);
+
+  });
 
   $('#img-send').click((e) => {
     e.preventDefault();
     const text = $('#input-text').val();
-    socket.emit('client-server-message', { nd:text,name:name});
+    const textIdRoom =$('#textIdRoom').html();
+    const idRoom = textIdRoom.slice(7);
+    socket.emit('client-server-message', { nd:text,name:name,id:idRoom});
     $('.messages').append(`<div class="right-message">${text}<br><small>${name}</small></div>`);
     $('#input-text').val('');
     return false;
   });
-  socket.on('client-server-message', (msg) => {
+  socket.on('server-message-client', (msg) => {
     $('.messages').append(`<div class="left-message">${msg.nd}<br><small>${msg.name}</small></div>`);
     //  $('.messages').append($(`<div class="left-message">`).text(msg));
 

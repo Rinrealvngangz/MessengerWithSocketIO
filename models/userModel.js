@@ -4,7 +4,8 @@ const Users = new mongoose.Schema({
   email:String,
   name:{type :String, unique:true},
   password:{ type :String, minlength:8},
-  idRoom:[{id:String, capa:{type:Boolean,default:true}}]
+  idRoom:[{ type: mongoose.Schema.Types.ObjectId, ref: 'room'}],
+  joinRoom:[{ type: mongoose.Schema.Types.ObjectId, ref: 'room'}],
 });
 const User =mongoose.model('localuser',Users);
 module.exports =User;

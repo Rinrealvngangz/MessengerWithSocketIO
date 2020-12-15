@@ -10,7 +10,7 @@ const signUpRouter = require('./routes/signUpRouter.js');
 const messengerRouter = require('./routes/messengerRouter.js');
 const loginFbRouter = require('./routes/loginfbRouter.js');
 const loginFbCallbackRouter = require('./routes/loginFbCallBackRouter.js');
-
+const checkIdRoomRouter = require('./routes/checkIdRoomRouter.js');
 const app = express();
 
 
@@ -33,14 +33,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-
+app.use('/checkIdRoom',checkIdRoomRouter);
 app.use('/messenger', messengerRouter);
 app.use('/login', loginRouter);
 app.use('/auth/facebook', loginFbRouter);
 app.use('/auth/facebook/callback', loginFbCallbackRouter);
 app.use('/signUp', signUpRouter);
-
-
 
 
 module.exports = app;

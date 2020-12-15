@@ -194,3 +194,11 @@ overflow-x:hidden;
   margin-top: 15px;
 
 }
+
+.idRoom{
+     display: inline-block;
+
+}
+.idRoom p{
+  font-size: 20px;
+}

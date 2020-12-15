@@ -31,15 +31,27 @@ db.on('error',err=>{
 
 io.on('connection',(socket)=>{
     console.log('a user connected');
-     socket.on('client-server-message',(msg)=>{
 
-           socket.broadcast.emit('client-server-message',msg);
+     socket.on('create-room',(data)=>{
+       console.log(data);
+         socket.join(data);
+         socket.Phong =data;
+         console.log(socket.adapter.rooms);
+     });
+     socket.on('join-room',(data)=>{
+       console.log(data);
+         socket.join(data);
+         socket.Phong =data;
+            console.log(socket.adapter.rooms);
+     });
+     socket.on('client-server-message',(msg)=>{
+           io.sockets.in(socket.Phong).emit('server-message-client',msg);
            console.log(msg);
-     })
+     });
 
     socket.on('disconnect',()=>{
        console.log('user disconnected');
-    })
+    });
 });
 
 server.listen(port,()=>console.log(`server on listen port : ${port}`));

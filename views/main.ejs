@@ -13,21 +13,29 @@
 </head>
 
 <body>
+
   <div class="container-createRoom">
        <form id="form-create" action="/messenger" method="post">
            <input type="radio" name="Room" id="radio-privateRoom" value="privateRoom">
            <label for ="privateRoom">Private Room</label><br>
            <input type="radio" name="Room" id="radio-ChatRoom" value="chatRoom">
            <label for ="chatRoom">Chat Room</label><br>
-           <button type="submit" name="btn-CreateRoom">Create Room</button><br>
-
-
+            <input type="text" name="createId" id="createId" placeholder="IdRoom">
+           <button type="submit" name="btn-CreateRoom" id="CreateRoom">Create Room</button><br>
        </form>
-       <form id="form-JoinRoom" action="/" method="get">
+       <form id="form-JoinRoom" action="/checkIdRoom" method="post">
          <input type="text" name="inputId" id="inputId" placeholder="input Id Room">
          <button type="submit" name="btn-JoinRoom" id="btn-JoinRoom">join Room</button>
        </form>
   </div>
+  <% if(idRoom){ %>
+   <div class=idRoom><p id="textIdRoom">IdRoom:<%=idRoom%></p></div>
+   <style>
+      .container-createRoom{display: none;}
+   </style>
+   <% } else {%>
+    <div class=idRoom><p>IdRoom:</p></div>
+     <% } %>
   <div class="container-messenger">
     <div class="name">
       <% if(name){ %>
