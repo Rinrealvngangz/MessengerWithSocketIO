@@ -33,12 +33,8 @@ io.on('connection',(socket)=>{
     console.log('a user connected:'+socket.id);
 
      socket.on('create-room',(data)=>{
-       console.log(data);
          socket.join(data);
          socket.Phong =data;
-         console.log(socket.Phong);
-         console.log(socket.rooms);
-         console.log(socket.adapter.rooms);
      });
      socket.on('join-room',(data)=>{
        console.log(data);
@@ -49,7 +45,7 @@ io.on('connection',(socket)=>{
 
      });
      socket.on('client-server-message',(msg)=>{
-           socket.to('rinroom').emit('server-message-client',msg);
+           socket.to(socket.Phong).emit('server-message-client',msg);
         //   console.log(msg.id);
      });
 

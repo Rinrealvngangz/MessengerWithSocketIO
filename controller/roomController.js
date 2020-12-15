@@ -29,13 +29,21 @@ exports.createRoom= async (req,res)=>{
                     console.log(err);
                   }
              });
-        /*  res.render('main',{idRoom:roomObj.id,
+          res.render('chat',{idRoom:roomObj.id,
                              photo:req.user.photo,
                               name:req.user.name
-                            });*/
+                            });
+                            //res.redirect('/chat');
             }else{
+              res.redirect('/login');
               console.log('no exists userName');
             }
 
     });
+}
+
+exports.viewChat =(req,res)=>{
+     res.render('chat',{photo:req.user.photo,
+                       name:req.user.name});
+
 }

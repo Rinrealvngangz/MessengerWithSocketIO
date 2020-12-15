@@ -4,9 +4,7 @@
 <head>
   <meta content="text/html; charset=UTF-8; X-Content-Type-Options=nosniff" http-equiv="Content-Type" />
   <meta charset="utf-8">
-
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="/socket.io/socket.io.js"></script>
   <script src="./index.js"></script>
   <link rel="stylesheet" type="text/css" href="./style.css">
   <title>messenger</title>
@@ -15,56 +13,18 @@
 <body>
 
   <div class="container-createRoom">
-
+      <form id="form-CreateRoom" action="/createIdRoom" method="post">
            <input type="radio" name="Room" id="radio-privateRoom" value="privateRoom">
            <label for ="privateRoom">Private Room</label><br>
            <input type="radio" name="Room" id="radio-ChatRoom" value="chatRoom">
            <label for ="chatRoom">Chat Room</label><br>
             <input type="text" name="createId" id="createId" placeholder="IdRoom">
-           <button  name="btn-CreateRoom" id="CreateRoom">Create Room</button><br>
-       
+           <button type="submit" name="btn-CreateRoom" id="CreateRoom">Create Id</button><br>
+       </form>
        <form id="form-JoinRoom" action="/checkIdRoom" method="post">
          <input type="text" name="inputId" id="inputId" placeholder="input Id Room">
-         <button type="submit" name="btn-JoinRoom" id="btn-JoinRoom">join Room</button>
+         <button type="submit" name="btn-JoinRoom" id="btn-JoinRoom">Find Room</button>
        </form>
-  </div>
-  <% if(idRoom){ %>
-   <div class=idRoom><p id="textIdRoom">IdRoom:<%=idRoom%></p></div>
-   <style>
-      .container-createRoom{display: none;}
-   </style>
-   <% } else {%>
-    <div class=idRoom><p>IdRoom:</p></div>
-     <% } %>
-  <div class="container-messenger">
-    <div class="name">
-      <% if(name){ %>
-      <h2 class="name-display" style="color:#ffffff;"> <%=name%></h2>
-      <% }  %>
-      <% if(photo){ %>
-      <h2 name='textId' class="idRoom-display"></h2>
-      <img src='<%=photo%>' id="avatar" width="50px" height="50px" alt="logo-avatar">
-      <% } else {%>
-      <img src='./image/icons8-facebook-messenger-50.png' id="avatar" width="50px" height="50px" alt="logo-avatar">
-      <%  } %>
-    </div>
-    <div class="main-list">
-      <div class="messages">
-        <!--  <div class="left-message">Hello,im rin real<br><small>user1</small></div>
-        <div class="left-message">Hello,im rin real<br><small>user1</small></div>
-        <div class="right-message">Hello,im rin real<br><small>user2</small></div>
-          <div class="right-message">Hi,i la rin ctk42,i la rin ctk42<br><small>user2</small></div>
-            <div class="right-message">Hi,i la rin ctk42,i la rin ctk42<br><small>user2</small></div> -->
-        <!--this container content -->
-
-      </div>
-    </div>
-    <div class="send_content">
-      <input id="input-text" type="text" name="content" placeholder="enter your message">
-
-      <img src="./image/icons8-arrow-48.png" id="img-send" width="38px" height="38px" alt="send_content">
-    </div>
-
   </div>
 
 </body>

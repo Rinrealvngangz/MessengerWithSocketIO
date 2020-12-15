@@ -18,7 +18,7 @@ exports.checkIdRoom=async(req,res)=>{
                         console.log(err);
                       }
                 });
-                res.render('main',{idRoom:result.id,
+                res.render('chat',{idRoom:result.id,
                                    photo:req.user.photo,
                                     name:req.user.name
                                   });
