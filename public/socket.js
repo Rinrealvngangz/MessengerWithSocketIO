@@ -1,23 +1,24 @@
 $(document).ready(function() {
   var socket = io();
   const name = $('h2').text();
-  $('#btn-chat').click(()=>{
   const textIdRoom =$('#textIdRoom').html();
   const idRoom = textIdRoom.slice(7);
+  $('#btn-chat').click(()=>{
      alert(idRoom);
      socket.emit('create-room',idRoom);
        $('#btn-chat').css('display','none');
   })
   $('#btn-signOut').click(()=>{
-    window.location.replace("http://localhost:3000/login");    
+    window.location.replace("http://localhost:3000/login");
   })
 
 
    $('#img-send').click((e) => {
       e.preventDefault();
       const text = $('#input-text').val();
-
-      socket.emit('client-server-message', { nd:text,name:name});
+      const dateSend = new Date();
+      console.log(dateSend);
+      socket.emit('client-server-message', { nd:text,name:name,date:dateSend,id:idRoom});
       $('.messages').append(`<div class="right-message">${text}<br><small>${name}</small></div>`);
       $('#input-text').val('');
       return false;

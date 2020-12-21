@@ -4,6 +4,8 @@ const app =require('./app.js');
 const mongoose =require('mongoose');
 const server = require('http').Server(app);
 const io =require('socket.io')(server);
+const express = require('express');
+const Room =require('./models/roomModel.js');
 const port =process.env.PORT;
 const strConnect =process.env.DATABASE
 .replace('{PASSWORD}',process.env.PASSWORD)
@@ -41,12 +43,26 @@ io.on('connection',(socket)=>{
          socket.join(data);
          socket.Phong =data;
 
-         console.log(socket.rooms);
+        // console.log(socket.rooms);
 
      });
-     socket.on('client-server-message',(msg)=>{
-           socket.to(socket.Phong).emit('server-message-client',msg);
-        //   console.log(msg.id);
+     socket.on('client-server-message',async(obj)=>{
+           socket.to(socket.Phong).emit('server-message-client',obj);
+          console.log(obj);
+          const filter = {
+              name:obj.name,
+              content:obj.nd,
+              dateSend:obj.date
+          }
+          await Room.findOne({id:obj.id},async (err,result)=>{
+               if(result){
+                  result.message.push(filter);
+                  await result.save();
+               }
+               if(err){
+                 console.log(err);
+               }
+          });
      });
 
     socket.on('disconnect',()=>{

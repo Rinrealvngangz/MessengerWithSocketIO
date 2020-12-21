@@ -13,20 +13,35 @@
 <body>
 
   <div class="container-createRoom">
-      <form id="form-CreateRoom" action="/createIdRoom" method="post">
-           <input type="radio" name="Room" id="radio-privateRoom" value="privateRoom">
-           <label for ="privateRoom">Private Room</label><br>
-           <input type="radio" name="Room" id="radio-ChatRoom" value="chatRoom">
-           <label for ="chatRoom">Chat Room</label><br>
-            <input type="text" name="createId" id="createId" placeholder="IdRoom">
-           <button type="submit" name="btn-CreateRoom" id="CreateRoom">Create Id</button><br>
-       </form>
-       <form id="form-JoinRoom" action="/checkIdRoom" method="post">
-         <input type="text" name="inputId" id="inputId" placeholder="input Id Room">
-         <button type="submit" name="btn-JoinRoom" id="btn-JoinRoom">Find Room</button>
-       </form>
+    <form id="form-CreateRoom" action="/createIdRoom" method="post">
+      <input type="radio" name="Room" id="radio-privateRoom" value="privateRoom">
+      <label for="privateRoom">Private Room</label><br>
+      <input type="radio" name="Room" id="radio-ChatRoom" value="chatRoom">
+      <label for="chatRoom">Chat Room</label><br>
+      <input type="text" name="createId" id="createId" placeholder="IdRoom">
+      <button type="submit" name="btn-CreateRoom" id="CreateRoom">Create Id</button><br>
+    </form>
+    <form id="form-JoinRoom" action="/checkIdRoom" method="post">
+      <input type="text" name="inputId" id="inputId" placeholder="input Id Room">
+      <button type="submit" name="btn-JoinRoom" id="btn-JoinRoom">Find Room</button>
+    </form>
   </div>
 
+  <div class="container-loadIdRoom">
+    <form id="form-connectRoom" action="/" method="post">
+      <label for="rooms">Room created:</label>
+      <select name="rooms" id="rooms-created">
+        <%if(items){%>
+        <% items.forEach(function(item){ %>
+        <option value="idRoom"><%=item%></option>
+        <%  }) %>
+        <% } else{%>
+          <option value="idRoom"></option>  
+        <% }%>
+      </select>
+      <button type="submit" name="btn-ConnectRoom" id="btn-ConnectRoom">Connect</button>
+    </form>
+  </div>
 </body>
 
 </html>

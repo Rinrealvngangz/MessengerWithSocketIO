@@ -92,7 +92,8 @@ exports.viewMessenger =(req, res,next) => {
     res.render('main', {
       name: req.user.name,
       photo:req.user.photo,
-      idRoom:''
+      idRoom:'',
+      items:[]
     });
 
   }
