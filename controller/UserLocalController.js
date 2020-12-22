@@ -3,6 +3,7 @@ const passport = require('passport');
 const bcrypt = require('bcrypt-nodejs');
 const localStrategy = require('passport-local').Strategy;
 const User = require('../models/userModel.js');
+const Room = require('../models/roomModel.js');
 
 exports.viewSignUpUser = (req, res) => {
   try {
@@ -46,11 +47,11 @@ exports.createUser = async (req, res) => {
   }
 }
 
-exports.viewSignIn =(req, res) => {
+exports.viewSignIn = (req, res) => {
 
-     res.render('login');
+  res.render('login');
 
-  }
+}
 exports.signIn = passport.authenticate('local', {
   successRedirect: '/messenger',
   failureRedirect: '/login',
@@ -88,15 +89,24 @@ exports.authenPassport = (req, res, next) => {
 }
 
 
-exports.viewMessenger =(req, res,next) => {
-    res.render('main', {
-      name: req.user.name,
-      photo:req.user.photo,
-      idRoom:'',
-      items:[]
-    });
+exports.viewMessenger = async (req, res, next) => {
+  await User.findById(req.user._id).populate('idRoom').exec((err, result) => {
+    if (result) {
+      const arrIdRoom = result.idRoom.map(item => item.id);
+      res.render('main', {
+        name: req.user.name,
+        photo: req.user.photo,
+        idRoom: '',
+        items: arrIdRoom
 
-  }
+      });
+    }
+    if (err) {
+      console.log(err);
+    }
+
+  });
+}
 
 exports.serializeUser = (req, res, next) => {
   passport.serializeUser(function(user, done) {
@@ -107,25 +117,25 @@ exports.serializeUser = (req, res, next) => {
 
 exports.deserializeUser = (req, res, next) => {
   passport.deserializeUser(function(user, done) {
-      //User.findById(id, function(err, user) {
-          done(null, user);
+    //User.findById(id, function(err, user) {
+    done(null, user);
 
-      //});
+    //});
   })
-next();
+  next();
 };
-exports.checkAuthenticated =(req,res,next)=>{
-     if(req.isAuthenticated()){
-       return next();
-     }
-       res.redirect('/login');
+exports.checkAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/login');
 
 
 }
-exports.checkNotAuthenticated =(req,res,next)=>{
-    if(req.isAuthenticated()){
-        return res.redirect('/messenger');
-    }
-    next();
+exports.checkNotAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return res.redirect('/messenger');
+  }
+  next();
 
 }

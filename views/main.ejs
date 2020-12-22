@@ -33,13 +33,13 @@
       <select name="rooms" id="rooms-created">
         <%if(items){%>
         <% items.forEach(function(item){ %>
-        <option value="idRoom"><%=item%></option>
+        <option ><%=item%></option>
         <%  }) %>
         <% } else{%>
-          <option value="idRoom"></option>  
+          <option value="idRoom"></option>
         <% }%>
       </select>
-      <button type="submit" name="btn-ConnectRoom" id="btn-ConnectRoom">Connect</button>
+      <button type="button" name="btn-ConnectRoom" id="btn-ConnectRoom">Connect</button>
     </form>
   </div>
 </body>
