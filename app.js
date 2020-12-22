@@ -11,7 +11,7 @@ const messengerRouter = require('./routes/messengerRouter.js');
 const loginFbRouter = require('./routes/loginfbRouter.js');
 const loginFbCallbackRouter = require('./routes/loginFbCallBackRouter.js');
 const checkIdRoomRouter = require('./routes/checkIdRoomRouter.js');
-const createRoomRouter =require('./routes/createRoomRouter.js');
+const roomRouter =require('./routes/RoomRouter.js');
 const chatRoomRouter =require('./routes/chatRoomRouter.js');
 const app = express();
 
@@ -23,7 +23,7 @@ app.use(session({
   secret: process.env.SECRET_SESSION,
   saveUninitialized: true,
   resave: true,
-  
+
 }));
 
 app.use(bodyParser.urlencoded({
@@ -35,7 +35,7 @@ app.use(passport.session());
 app.use(flash());
 
 app.use('/chat',chatRoomRouter);
-app.use('/createIdRoom',createRoomRouter);
+app.use('/createIdRoom',roomRouter);
 app.use('/checkIdRoom',checkIdRoomRouter);
 app.use('/messenger', messengerRouter);
 app.use('/login', loginRouter);

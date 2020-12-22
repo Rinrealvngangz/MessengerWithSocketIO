@@ -20,7 +20,8 @@ exports.checkIdRoom=async(req,res)=>{
                 });
                 res.render('chat',{idRoom:result.id,
                                    photo:req.user.photo,
-                                    name:req.user.name
+                                    name:req.user.name,
+                                    items:[]
                                   });
           }else{
               res.redirect('/messenger');

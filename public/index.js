@@ -10,9 +10,12 @@ $(document).ready(function() {
   alert(`success create room: ${idRoom}`);
 
   });
-
+$('#roomcreated').click(()=>{
+  const data = $('#roomcreated').val();
+  $('#idRoomCreated').val(data);
+})
   $('#btn-ConnectRoom').click(()=>{
-        const data = $('#rooms-created').val();
+        const data = $('#roomcreated').val();
          alert(`success create room: ${data}`);
   })
   });

@@ -28,18 +28,19 @@
   </div>
 
   <div class="container-loadIdRoom">
-    <form id="form-connectRoom" action="/" method="post">
+    <form id="form-connectRoom" action="/chat" method="post">
       <label for="rooms">Room created:</label>
-      <select name="rooms" id="rooms-created">
+      <select  id="roomcreated" name="roomcreated">
         <%if(items){%>
         <% items.forEach(function(item){ %>
-        <option ><%=item%></option>
+        <option><%=item%></option>
         <%  }) %>
         <% } else{%>
           <option value="idRoom"></option>
         <% }%>
       </select>
-      <button type="button" name="btn-ConnectRoom" id="btn-ConnectRoom">Connect</button>
+        <input type="text" name="idRoomCreated" id="idRoomCreated" readonly>
+      <button type="submit" name="btn-ConnectRoom" id="btn-ConnectRoom">connect</button>
     </form>
   </div>
 </body>

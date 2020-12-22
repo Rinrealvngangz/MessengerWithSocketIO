@@ -42,9 +42,6 @@ io.on('connection',(socket)=>{
        console.log(data);
          socket.join(data);
          socket.Phong =data;
-
-        // console.log(socket.rooms);
-
      });
      socket.on('client-server-message',async(obj)=>{
            socket.to(socket.Phong).emit('server-message-client',obj);

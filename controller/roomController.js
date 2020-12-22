@@ -2,9 +2,29 @@ const express = require('express');
 const Room =require('../models/roomModel.js');
 const User =require('../models/userModel.js');
 
+
+exports.getRoom =async (req,res)=>{
+
+     const idRoom =req.body.idRoomCreated;
+     await Room.findOne({id:idRoom},(err,result)=>{
+             if(result){
+                console.log(result.message);
+                res.render('chat',{idRoom:result.id,
+                                   photo:req.user.photo,
+                                   name:req.user.name,
+                                   items:result.message
+                                  });
+             }
+             if(err){
+               console.log(err);
+             }
+     })
+}
+
 exports.createRoom= async (req,res)=>{
     const username = req.user.name;
-    const idRoom =req.body.createId;
+     const idRoom =req.body.createId;
+     console.log(idRoom);
     let filter = {name:username};
     let arrIdRoom =[];
     let capa =true;
@@ -29,9 +49,11 @@ exports.createRoom= async (req,res)=>{
                     console.log(err);
                   }
              });
+
           res.render('chat',{idRoom:roomObj.id,
                              photo:req.user.photo,
-                              name:req.user.name
+                             name:req.user.name,
+                            items:[]
                             });
                             //res.redirect('/chat');
             }else{
@@ -43,6 +65,7 @@ exports.createRoom= async (req,res)=>{
 }
 
 exports.viewChat =(req,res)=>{
+
      res.render('chat',{photo:req.user.photo,
                        name:req.user.name});
 
