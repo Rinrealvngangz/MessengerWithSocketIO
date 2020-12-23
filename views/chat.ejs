@@ -37,13 +37,13 @@
     </div>
     <div class="main-list">
 
-      <%if(typeof items !==undefined && name){%>
+      <%if(items !== undefined){%>
       <div class="messages">
         <% items.forEach(function(item){ %>
-        <% if(item.name.localeCompare(name)==0){ %>
-        <div class="left-message"><%=item.content%><br><small><%=item.name%></small></div>
+        <% if(item.name === name){ %>
+          <div class="right-message"><%=item.content%><br><small><%=item.name%></small></div>
         <% }else {%>
-        <div class="right-message"><%=item.content%><br><small><%=item.name%></small></div>
+        <div class="left-message"><%=item.content%><br><small><%=item.name%></small></div>
         <% }%>
         <% }) %>
       </div>

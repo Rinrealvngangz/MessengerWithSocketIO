@@ -1,6 +1,6 @@
 $(document).ready(function() {
   var socket = io();
-  const name = $('h2').text();
+  const name =$.trim($('h2.name-display').html()) ;
   const textIdRoom =$('#textIdRoom').html();
   const idRoom = textIdRoom.slice(7);
   $('#btn-chat').click(()=>{

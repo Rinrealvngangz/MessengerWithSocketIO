@@ -53,7 +53,7 @@ exports.createRoom= async (req,res)=>{
           res.render('chat',{idRoom:roomObj.id,
                              photo:req.user.photo,
                              name:req.user.name,
-                            items:[]
+                             items:[]
                             });
                             //res.redirect('/chat');
             }else{
