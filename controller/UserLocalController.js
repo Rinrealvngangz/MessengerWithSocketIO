@@ -90,15 +90,16 @@ exports.authenPassport = (req, res, next) => {
 
 
 exports.viewMessenger = async (req, res, next) => {
-  await User.findById(req.user._id).populate('idRoom').exec((err, result) => {
+  await User.findById(req.user._id).populate('idRoom').populate('joinRoom').exec((err, result) => {
     if (result) {
       const arrIdRoom = result.idRoom.map(item => item.id);
+      const arrIdJoinRoom =result.joinRoom.map(item=>item.id);
       res.render('main', {
         name: req.user.name,
         photo: req.user.photo,
         idRoom: '',
-        items: arrIdRoom
-
+        items: arrIdRoom,
+        arrJoinRoom: arrIdJoinRoom
       });
     }
     if (err) {

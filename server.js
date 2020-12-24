@@ -35,14 +35,11 @@ io.on('connection',(socket)=>{
     console.log('a user connected:'+socket.id);
 
      socket.on('create-room',(data)=>{
-         socket.join(data);
-         socket.Phong =data;
+         socket.join(data.id);
+         socket.Phong =data.id;
+         socket.to(socket.Phong).emit('client-Join-Room',data.mess);
      });
-     socket.on('join-room',(data)=>{
-       console.log(data);
-         socket.join(data);
-         socket.Phong =data;
-     });
+
      socket.on('client-server-message',async(obj)=>{
            socket.to(socket.Phong).emit('server-message-client',obj);
           console.log(obj);

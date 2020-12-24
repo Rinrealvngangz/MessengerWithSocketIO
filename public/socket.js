@@ -5,8 +5,12 @@ $(document).ready(function() {
   const idRoom = textIdRoom.slice(7);
   $('#btn-chat').click(()=>{
      alert(idRoom);
-     socket.emit('create-room',idRoom);
+     socket.emit('create-room',{id:idRoom,mess:`${name} started to chat.`});
        $('#btn-chat').css('display','none');
+
+  })
+  socket.on('client-Join-Room',(data)=>{
+     alert(data);
   })
   $('#btn-signOut').click(()=>{
     window.location.replace("http://localhost:3000/login");

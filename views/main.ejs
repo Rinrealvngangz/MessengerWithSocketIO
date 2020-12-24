@@ -25,6 +25,7 @@
       <input type="text" name="inputId" id="inputId" placeholder="input Id Room">
       <button type="submit" name="btn-JoinRoom" id="btn-JoinRoom">Find Room</button>
     </form>
+
   </div>
 
   <div class="container-loadIdRoom">
@@ -39,10 +40,23 @@
           <option value="idRoom"></option>
         <% }%>
       </select>
+      <label for="rooms">Room joined:</label>
+
+      <select  id="roomjoin" name="roomjoin">
+        <%if(arrJoinRoom!=undefined){%>
+        <% arrJoinRoom.forEach(function(item){ %>
+        <option><%=item%></option>
+        <%  }) %>
+        <% } else{%>
+          <option value="idRoomJoin"></option>
+        <% }%>
+      </select>
+
         <input type="text" name="idRoomCreated" id="idRoomCreated" readonly>
       <button type="submit" name="btn-ConnectRoom" id="btn-ConnectRoom"disabled>connect</button>
     </form>
   </div>
+
 </body>
 
 </html>
