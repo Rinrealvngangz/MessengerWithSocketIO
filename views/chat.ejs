@@ -36,27 +36,30 @@
       <%  } %>
     </div>
     <div class="main-list">
-
+  <div class="messages">
       <%if(items !== undefined){%>
-      <div class="messages">
         <% items.forEach(function(item){ %>
         <% if(item.name === name){ %>
-          <div class="right-message"><%=item.content%><br><small><%=item.name%></small></div>
+          <div class="right-message"> <%=item.content%><br><small><%=item.name%></small>
+         <img src="./image/icons8-trash-20.png" onclick="deleteMessage(this)" id="img-right-delete" width="20px" height="20px"  alt="delete-content">
+          </div>
         <% }else {%>
         <div class="left-message"><%=item.content%><br><small><%=item.name%></small></div>
         <% }%>
         <% }) %>
+
+      <% } %>
+  </div>
+        <!--  <div class="left-message">Hello,im rin real<br><small>user1</small>
       </div>
-      <% } else {%>
-      <div class="messages">
-        <!--  <div class="left-message">Hello,im rin real<br><small>user1</small></div>
       <div class="left-message">Hello,im rin real<br><small>user1</small></div>
-      <div class="right-message">Hello,im rin real<br><small>user2</small></div>
+      <div class="right-message">Hello,im rin real<br><small>user2</small>
+<img src="./image/icons8-trash-30.png" id="img-right-delete" width="38px" height="38px" alt="delete-content">
+    </div>
         <div class="right-message">Hi,i la rin ctk42,i la rin ctk42<br><small>user2</small></div>
           <div class="right-message">Hi,i la rin ctk42,i la rin ctk42<br><small>user2</small></div> -->
         <!--this container content -->
-      </div>
-      <% }%>
+
     </div>
     <div class="send_content">
       <input id="input-text" type="text" name="content" placeholder="enter your message">

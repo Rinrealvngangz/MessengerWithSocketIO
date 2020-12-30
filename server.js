@@ -32,6 +32,8 @@ db.on('error',err=>{
 });
 
 io.on('connection',(socket)=>{
+
+  const socketId = socket.id;
     console.log('a user connected:'+socket.id);
 
      socket.on('create-room',(data)=>{
@@ -51,7 +53,13 @@ io.on('connection',(socket)=>{
           await Room.findOne({id:obj.id},async (err,result)=>{
                if(result){
                   result.message.push(filter);
-                  await result.save();
+                 await result.save((err,mess)=>{
+                        console.log(mess._id);
+                        obj.idMess=mess._id;
+                      io.to(`${socketId}`).emit('server-send-myData',obj);
+
+                  });
+
                }
                if(err){
                  console.log(err);
