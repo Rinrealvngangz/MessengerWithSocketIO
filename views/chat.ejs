@@ -40,11 +40,11 @@
       <%if(items !== undefined){%>
         <% items.forEach(function(item){ %>
         <% if(item.name === name){ %>
-          <div class="right-message"> <%=item.content%><br><small><%=item.name%></small>
+          <div class="right-message" id="<%=item._id%>"> <%=item.content%><br><small><%=item.name%></small>
          <img src="./image/icons8-trash-20.png" onclick="deleteMessage(this)" id="img-right-delete" width="20px" height="20px"  alt="delete-content">
           </div>
         <% }else {%>
-        <div class="left-message"><%=item.content%><br><small><%=item.name%></small></div>
+        <div class="left-message" id="<%=item._id%>"><%=item.content%><br><small><%=item.name%></small></div>
         <% }%>
         <% }) %>
 

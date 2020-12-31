@@ -2,7 +2,7 @@ $(document).ready(function() {
 
   $("#btn-JoinRoom").click(() => {
     const idName = $('#inputId').val();
-    
+
   })
   $('#CreateRoom').click(() => {
     const idRoom = Date.now() + '';
@@ -32,7 +32,5 @@ $(document).ready(function() {
   $('#btn-ConnectRoom').click(() => {
     const data = $('#idRoomCreated').val();
     alert(`ConnectRoom success : ${data}`);
-
-
   })
 });
